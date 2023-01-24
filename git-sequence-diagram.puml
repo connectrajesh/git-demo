@@ -1,0 +1,46 @@
+@startuml
+
+title Git Remote and Local Repositories
+
+actor User
+
+database LocalRepo
+database RemoteRepo
+
+User -> LocalRepo: git init
+
+activate LocalRepo
+LocalRepo -> LocalRepo: Initialize new local repository
+deactivate LocalRepo
+
+User -> RemoteRepo: git clone https://github.com/user/repo.git
+
+activate RemoteRepo
+RemoteRepo -> LocalRepo: Clone remote repository to local
+deactivate RemoteRepo
+
+User -> LocalRepo: git add .
+
+activate LocalRepo
+LocalRepo -> LocalRepo: Add all modified files to staging area
+deactivate LocalRepo
+
+User -> LocalRepo: git commit -m "Added new feature"
+
+activate LocalRepo
+LocalRepo -> LocalRepo: Commit changes to local repository
+deactivate LocalRepo
+
+User -> RemoteRepo: git push origin master
+
+activate RemoteRepo
+RemoteRepo -> RemoteRepo: Update remote repository with changes
+deactivate RemoteRepo
+
+User -> LocalRepo: git pull origin master
+
+activate LocalRepo
+LocalRepo -> RemoteRepo: Pull changes from remote repository
+deactivate LocalRepo
+
+@enduml
